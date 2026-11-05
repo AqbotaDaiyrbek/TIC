@@ -1,0 +1,68 @@
+
+print("=== 1-ЕСЕП ===")
+
+N = 23
+k = 0
+
+while 2 ** k < N:
+    k += 1
+
+print("Алфавиттегі символдар саны:", N)
+print("2^k >= N шарты")
+
+print("2^4 =", 2 ** 4)
+print("2^5 =", 2 ** 5)
+
+print("Ең аз бит саны:", k)
+print("Жауап:", k, "бит")
+
+
+print("\n=== 2-ЕСЕП ===")
+
+codes = {
+    "A": "0",
+    "B": "10",
+    "C": "110",
+    "D": "111"
+}
+
+message = "0110110111"
+
+print("Берілген кодтар:", codes)
+print("Екілік хабар:", message)
+
+# Фано шартын тексеру
+fano = True
+
+for a in codes:
+    for b in codes:
+        if a != b and codes[b].startswith(codes[a]):
+            fano = False
+
+print("Фано шарты орындала ма?", fano)
+
+# Хабарды декодтау
+decoded = ""
+parts = []
+current = ""
+
+for bit in message:
+    current += bit
+
+    for symbol, code in codes.items():
+        if current == code:
+            decoded += symbol
+            parts.append(current)
+            current = ""
+            break
+
+print("Кодтарға бөліну:", " | ".join(parts))
+
+if current:
+    print("Қате: хабар толық декодталмады")
+else:
+    print("Декодталған хабар:", decoded)
+
+print("\nҚорытынды:")
+print("1-есеп:", k, "бит қажет")
+print("2-есеп:", decoded)
